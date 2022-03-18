@@ -1,5 +1,5 @@
 import {Body, Controller, Post } from '@nestjs/common';
-import { ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
+import { ApiBody, ApiOkResponse, ApiUnauthorizedResponse } from '@nestjs/swagger';
 import { AuthService } from './auth.service';
 import { AuthDto } from './dto/authDto';
 import { accessToken } from './interface/user.interface';
@@ -12,6 +12,7 @@ export class AuthController {
 
     @Post('login')
     @ApiOkResponse({description: "accessToken generated"})
+    @ApiBody({type: AuthDto})
     @ApiUnauthorizedResponse({description: "Invalid or no credentials"})
     login (@Body() dto: AuthDto):accessToken {
         return this.authService.signinLocal(dto)
