@@ -11,7 +11,7 @@ export class AppController {
   @UseGuards(AuthGuard('jwt'))
   @Get('')
   @ApiBearerAuth()
-  getHello(): string {
+  getHello(): {} {
     return this.appService.getHello();
   }
 }
