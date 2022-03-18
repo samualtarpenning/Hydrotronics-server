@@ -8,6 +8,12 @@ async function bootstrap() {
     .setTitle('Hydrotronics-Server')
     .setDescription('Api for Hydrotronics Server')
     .setVersion('1.0')
+    .addBearerAuth(
+      {
+        type: "http", scheme: "bearer", bearerFormat: "Token"
+      },
+      "accessToken",
+    )
     .addTag('Default')
     .build();
   const document = SwaggerModule.createDocument(app, config);
