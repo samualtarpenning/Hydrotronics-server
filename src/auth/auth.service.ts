@@ -53,13 +53,13 @@ export class AuthService {
 
         //finally, pin is correct, convert it to jwt and send to frontend
 
-        return await {pin : this.signPin(pinflat)};
+        return await {jwt : this.signPin(pinflat)};
     }
 
     // sign pin with jwt and return token
     signPin(pin: string){
         return this.jwtService.sign({
-            pin: pin
+            jwt: pin
         })
     }
 
