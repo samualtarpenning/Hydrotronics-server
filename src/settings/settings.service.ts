@@ -14,8 +14,8 @@ export class SettingsService {
     }
 
     //get setting by id
-    async getASettings(settings_title: string):Promise<Setting | null>{
-        let settingFound = await this.settingsModel.findOne({settings_title : settings_title});
+    async getASettings(id: string):Promise<Setting | null>{
+        let settingFound = await this.settingsModel.findOne({_id : id});
         if(settingFound == null || settingFound == undefined || !settingFound){
             throw new NotFoundException('Post not found.');
         }
@@ -29,18 +29,18 @@ export class SettingsService {
     }
 
     //remove setting
-    async delete(title: string):Promise<Setting> {
-        return await this.settingsModel.findOneAndDelete({settings_title : title})
+    async delete(id: string):Promise<Setting> {
+        return await this.settingsModel.findOneAndDelete({_id : id})
     }
 
 
     //update setting by Id
-    async update(settings_title:string, setting: Setting):Promise<Setting>{
-        let settingFound = await this.settingsModel.findOne({settings_title : settings_title});
+    async update(id:string, setting: Setting):Promise<Setting>{
+        let settingFound = await this.settingsModel.findOne({_id : id});
         if(settingFound == null || settingFound == undefined || !settingFound){
             throw new NotFoundException('Post not found.');
         }
-        return await this.settingsModel.findOneAndUpdate({settings_title: settings_title}, {setting}, {new:true})
+        return await this.settingsModel.findOneAndUpdate({_id: id}, {setting}, {new:true})
          
     }
 

@@ -11,7 +11,7 @@ export class SettingsController {
 
 // get all settings 
 @UseGuards(AuthGuard('jwt'))
-@Get()
+@Get("/getsettings")
 @ApiUnauthorizedResponse({description : "invalid credentials"})
 @ApiBearerAuth()
     async getAllSettings():Promise<Setting[]>{
@@ -20,16 +20,16 @@ export class SettingsController {
 
 // get a specific setting
 @UseGuards(AuthGuard('jwt'))
-@Get(':title')
+@Get('/getsetting/:id')
 @ApiUnauthorizedResponse({description : "invalid credentials"})
 @ApiBearerAuth()
-    async getASettings(@Param('title') title):Promise<Setting>{
-        return await this.settingsService.getASettings(title)
+    async getASettings(@Param('id') id):Promise<Setting>{
+        return await this.settingsService.getASettings(id)
     }
 
 //create a setting 
 @UseGuards(AuthGuard('jwt'))
-@Post()
+@Post('/createsetting')
 @ApiUnauthorizedResponse({description : "invalid credentials"})
 @ApiBody({type: SettingsDTO})
 @ApiBearerAuth()
@@ -40,10 +40,10 @@ export class SettingsController {
 //delete a setting
 @UseGuards(AuthGuard('jwt'))
 @ApiUnauthorizedResponse({description : "invalid credentials"})
-@Delete(":title")
+@Delete("/removesetting/:id")
 @ApiBearerAuth()
-    deleteAsetting(@Param('title') title):Promise<Setting>{
-        return this.settingsService.delete(title)
+    deleteAsetting(@Param('id') id):Promise<Setting>{
+        return this.settingsService.delete(id)
     }
 
 
