@@ -17,7 +17,7 @@ export class SettingsService {
     async getASettings(id: string):Promise<Setting | null>{
         let settingFound = await this.settingsModel.findOne({_id : id});
         if(settingFound == null || settingFound == undefined || !settingFound){
-            throw new NotFoundException('Post not found.');
+            throw new NotFoundException('Settings not found.');
         }
         return settingFound;
     }
@@ -38,7 +38,7 @@ export class SettingsService {
     async update(id:string, setting: Setting):Promise<Setting>{
         let settingFound = await this.settingsModel.findOne({_id : id});
         if(settingFound == null || settingFound == undefined || !settingFound){
-            throw new NotFoundException('Post not found.');
+            throw new NotFoundException('Settings not found.');
         }
         return await this.settingsModel.findOneAndUpdate({_id: id}, {setting}, {new:true})
          

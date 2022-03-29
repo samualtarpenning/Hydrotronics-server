@@ -18,5 +18,12 @@ export class AuthController {
         return this.authService.signinLocal(dto)
     }
 
+    //this will be removed later
+    @Post("register")
+    async register (@Body() dto: AuthDto):Promise<{}> {
+        return this.authService.register(dto)
+    }
+
+
     
 }
