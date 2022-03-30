@@ -5,9 +5,18 @@ import { AppService } from './app.service';
 import { AuthModule } from './auth/auth.module';
 import keys from './config/keys';
 import { SettingsModule } from './settings/settings.module';
+import { ConfigModule } from '@nestjs/config';
+import { configuration } from './config/configuration';
 
 @Module({
-  imports: [MongooseModule.forRoot("mongodb+srv://hydromanager:G$zy9uwF6UHtn!i@hydro.8dhb5.mongodb.net/hydro_dev?retryWrites=true&w=majority"), AuthModule, SettingsModule],
+  imports: [ConfigModule.forRoot({ 
+    envFilePath: `${process.cwd()}/config/env/${process.env.NODE_ENV}.env`,
+    load: [configuration] 
+ }), 
+ MongooseModule.forRoot(process.env.NODE_ENV === "development" ? keys.development.mongoUri : keys.production.mongoUri), 
+ AuthModule, 
+ SettingsModule
+],
   controllers: [AppController],
   providers: [AppService],
 })
