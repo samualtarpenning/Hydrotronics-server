@@ -6,12 +6,13 @@ import { AuthModule } from './auth/auth.module';
 import keys from './config/keys';
 import { SettingsModule } from './settings/settings.module';
 import { ConfigModule } from '@nestjs/config';
-import { configuration } from './config/configuration';
+import configuration  from './config/configuration';
 
 @Module({
   imports: [ConfigModule.forRoot({ 
     envFilePath: `${process.cwd()}/config/env/${process.env.NODE_ENV}.env`,
-    load: [configuration] 
+    load: [configuration],
+    isGlobal: true,
  }), 
  MongooseModule.forRoot(process.env.NODE_ENV === "development" ? keys.development.mongoUri : keys.production.mongoUri), 
  AuthModule, 

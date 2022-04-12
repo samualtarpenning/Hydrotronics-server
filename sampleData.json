@@ -1,0 +1,25 @@
+{
+    "name" : "zoneA",
+    "light" : {
+        "pin_id" : 1,
+        "name" : "zoneALight",
+        "updatedAt" : "2010-06-29T06:53:32.643Z"
+    },
+     "pump" : {
+        "pin_id" : 2,
+        "name" : "zoneALight",
+        "updatedAt" : "2010-06-29T06:53:32.643Z"
+    },
+     "fan" : {
+        "pin_id" : 3,
+        "name" : "zoneALight",
+        "updatedAt" : "2010-06-29T06:53:32.643Z"
+    },
+     "misc" : {
+        "pin_id" : 4,
+        "name" : "zoneALight",
+        "updatedAt" : "2010-06-29T06:53:32.643Z"
+    },
+    "temperature" : 45,
+    "humidity" : 60
+}
