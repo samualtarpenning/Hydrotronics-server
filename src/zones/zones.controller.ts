@@ -10,7 +10,6 @@ export class ZonesController {
     constructor(private readonly zonesService: ZonesService){}
 
     //create zone
-    //create a setting 
     @UseGuards(AuthGuard('jwt'))
     @Post('/createzone')
     @ApiUnauthorizedResponse({description : "invalid credentials"})
@@ -18,6 +17,15 @@ export class ZonesController {
     @ApiBearerAuth()
     async createASetting(@Body() body: zonesDTO):Promise<Zone | {}>{
             return await this.zonesService.createZone(body);
+    }
+
+    //get all zones
+    @UseGuards(AuthGuard('jwt'))
+    @Get("/getallzones")
+    @ApiUnauthorizedResponse({description : "invalid credentials"})
+    @ApiBearerAuth()
+    async getAllZones():Promise<Zone[]>{
+        return await this.zonesService.getAllZones()
     }
 
 

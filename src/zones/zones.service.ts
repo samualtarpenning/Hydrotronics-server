@@ -29,4 +29,9 @@ export class ZonesService {
         
     }
 
+    //get all zones
+     async getAllZones():Promise<Zone[] | null>{
+        return await this.zonesModel.find();
+    }
+
 }
