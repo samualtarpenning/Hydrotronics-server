@@ -7,6 +7,7 @@ import keys from './config/keys';
 import { SettingsModule } from './settings/settings.module';
 import { ConfigModule } from '@nestjs/config';
 import configuration  from './config/configuration';
+import { ZonesModule } from './zones/zones.module';
 
 @Module({
   imports: [ConfigModule.forRoot({ 
@@ -16,7 +17,8 @@ import configuration  from './config/configuration';
  }), 
  MongooseModule.forRoot(process.env.NODE_ENV === "development" ? keys.development.mongoUri : keys.production.mongoUri), 
  AuthModule, 
- SettingsModule
+ SettingsModule,
+ ZonesModule
 ],
   controllers: [AppController],
   providers: [AppService],
