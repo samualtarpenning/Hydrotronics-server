@@ -1,4 +1,4 @@
-import { HttpException, HttpStatus, Injectable } from '@nestjs/common';
+import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
 import { zonesDTO } from './dto/zonesDTO';
 import { Zone } from './interface/zonesInterface';
 import {Model} from "mongoose"
@@ -33,5 +33,25 @@ export class ZonesService {
      async getAllZones():Promise<Zone[] | null>{
         return await this.zonesModel.find();
     }
+
+    //get specific zone by id
+    async getAZone(id: string):Promise<Zone | null>{
+        let zoneFound = await this.zonesModel.findOne({_id : id});
+        if(zoneFound == null || zoneFound == undefined || !zoneFound){
+            throw new NotFoundException('Zone not found.');
+        }
+        return zoneFound;
+    }
+
+    
+
+
+
+
+
+
+
+
+
 
 }

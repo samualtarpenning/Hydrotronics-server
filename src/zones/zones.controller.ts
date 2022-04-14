@@ -28,6 +28,17 @@ export class ZonesController {
         return await this.zonesService.getAllZones()
     }
 
+    //get specific zone
+    @UseGuards(AuthGuard('jwt'))
+    @Get('/getzone/:id')
+    @ApiUnauthorizedResponse({description : "invalid credentials"})
+    @ApiBearerAuth()
+    async getAZone(@Param('id') id):Promise<Zone>{
+        return await this.zonesService.getAZone(id)
+    }
+    
+    
+
 
 
     
