@@ -7,7 +7,6 @@ import { InjectModel } from '@nestjs/mongoose';
 @Injectable()
 export class ZonesService {
     constructor(@InjectModel('Zone') private readonly zonesModel:Model<Zone>){}
-
     //create zone
     async createZone(zone: zonesDTO):Promise<Zone | {}>{
         // check if zone name exist and return error
@@ -28,12 +27,10 @@ export class ZonesService {
         }
         
     }
-
     //get all zones
      async getAllZones():Promise<Zone[] | null>{
         return await this.zonesModel.find();
     }
-
     //get specific zone by id
     async getAZone(id: string):Promise<Zone | null>{
         let zoneFound = await this.zonesModel.findOne({_id : id});
@@ -42,6 +39,7 @@ export class ZonesService {
         }
         return zoneFound;
     }
+    
 
     
 
