@@ -15,7 +15,7 @@ import { ZonesModule } from './zones/zones.module';
     load: [configuration],
     isGlobal: true,
  }), 
- MongooseModule.forRoot(process.env.NODE_ENV === "development" ? keys.development.mongoUri : keys.production.mongoUri), 
+ MongooseModule.forRoot(process.env.NODE_ENV === "development" ? keys.development.localdb : keys.production.mongoUri), 
  AuthModule, 
  SettingsModule,
  ZonesModule

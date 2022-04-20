@@ -1,5 +1,5 @@
 import { HttpException, HttpStatus, Injectable, NotFoundException } from '@nestjs/common';
-import { zonesDTO } from './dto/zonesDTO';
+import { zonesDTO, editZoneDTO } from './dto/zonesDTO';
 import { Zone } from './interface/zonesInterface';
 import {Model} from "mongoose"
 import { InjectModel } from '@nestjs/mongoose';
@@ -39,6 +39,29 @@ export class ZonesService {
         }
         return zoneFound;
     }
+    //edit zone
+    async editZone(id:string, body: editZoneDTO):Promise<Zone | null>{
+        let zoneFound = await this.zonesModel.findOne({_id : id});
+        if(zoneFound == null || zoneFound == undefined || !zoneFound){
+            throw new NotFoundException('Zone not found.');
+        }
+        let editedZone =await this.zonesModel.findByIdAndUpdate(
+            id,
+            { $set: body },
+            { new: true }
+          );
+          return editedZone
+    }
+
+    //delete zone
+    async deleteZone(id:string):Promise<any>{
+        return await this.zonesModel.findByIdAndRemove(id);
+    }
+
+    
+
+
+
     
 
     

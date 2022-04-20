@@ -1,29 +1,18 @@
-
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
-import { IsBoolean, IsNumber, IsString, ValidateNested } from "class-validator";
+import { IsBoolean, IsNumber, IsOptional, IsString, ValidateNested } from "class-validator";
 
-class Light{
-    readonly pin: number
-    readonly name: string
-    readonly updatedAt: Date
-}
-class Pump{
-    readonly pin: number
-    readonly name: string
-    readonly updatedAt: Date
-}
-class Fan{
-    readonly pin: number
-    readonly name: string
-    readonly updatedAt: Date
+
+//
+export class servicesDTO{ 
+    @IsString()
+    @ApiProperty({type: String, description: "zone service name name, eg: light"})
+    readonly name: string;
+    @IsNumber()
+    @ApiProperty({type: Number, description: "zone service id: eg 1, 2"})
+    readonly pin_id: number;
 }
 
-class Misc{
-    readonly pin: number
-    readonly name: string
-    readonly updatedAt: Date
-}
 export class zonesDTO{
     @IsString()
     @ApiProperty({type: String, description: "zone name"})
@@ -36,25 +25,23 @@ export class zonesDTO{
     @IsNumber()
     @ApiProperty({type: Number, description: "zone humidity"})
     readonly humidity: number;
-
-    @Type(() => Light)
-    @ValidateNested()
-    @ApiProperty({type: Object, description: "light values like pin_id, name and updated at"})
-    readonly light:Light
-
-    @Type(() => Pump)
-    @ValidateNested()
-    @ApiProperty({type: Object, description: "pump values like pin_id, name and updated at"})
-    readonly pump:Pump
-
-    @Type(() => Fan)
-    @ValidateNested()
-    @ApiProperty({type: Object, description: "fan values like pin_id, name and updated at"})
-    readonly fan:Fan
-
-    @Type(() => Misc)
-    @ValidateNested()
-    @ApiProperty({type: Object, description: "misc values like pin_id, name and updated at"})
-    readonly misc:Misc
 }
 
+
+export class editZoneDTO{
+    @IsString()
+    @ApiProperty({type: String, description: "zone name"})
+    @IsOptional()
+    readonly name: string;
+
+    @IsNumber()
+    @ApiProperty({type: Number, description: "zone temperature"})
+    @IsOptional()
+    readonly temperature: number;
+
+    @IsNumber()
+    @ApiProperty({type: Number, description: "zone humidity"})
+    @IsOptional()
+    readonly humidity: number;
+
+}
